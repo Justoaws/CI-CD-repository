@@ -1,0 +1,40 @@
+version: 0.2
+
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.10
+      runtime: version
+    commands:
+      - echo installing cfn-lint
+      - pip3 install cfn-lint
+
+  pre_build:
+    commands:
+      - echo ===WE ARE ENTERED PRE-BUILD STAGE ===
+      - echo CHECKING THE VERSION OF PYTHON INSTALLED
+      - python --version
+      - echo CHECKING IF CFN-LINT WAS INSTALLED
+      - cfn-lint --version
+
+  build:
+    commands:
+      - echo ===WE ARE ENTERED BUILD STAGE===
+      - echo BUILD STARTED ON JUNE 'date'
+      - echo VALITATING THE CLOUDFORMATION TEMPLATE
+      - cfn-lint claudio-cloudformation-template.yml
+      - echo BUILD THE CLOUDFORMATION TEMPLATE
+      - 
+      - 
+
+  post_build:
+    commands:
+      - echo ===WE ENTERED THE POST-BUILD STATGE
+      - echo Build completed on `date`
+      - ls -l
+      - 
+
+artifacts:
+  files:
+    - '**/*'
